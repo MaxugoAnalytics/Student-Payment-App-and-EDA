@@ -17,7 +17,7 @@ This project analyzes survey data collected from students across 25 African coun
 
 ## **Dataset**  
 The dataset contains information on student demographics, IT domain choices, and test participation across 25 African countries. You can access the dataset here:  
-<u>[](https://github.com/MaxugoAnalytics/Student-Payment-App-and-EDA/blob/main/Raw%20student_data.csv)</u> (Replace with actual link)
+<u>[](https://github.com/MaxugoAnalytics/Student-Payment-App-and-EDA/blob/main/Raw%20student_data.csv)</u>
 
 ## **Prediction App**  
 The machine learning model developed in this project has been turned into an interactive prediction app. You can access and test the app here:  
