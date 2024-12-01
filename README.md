@@ -17,16 +17,17 @@ This project analyzes survey data collected from students across 25 African coun
 
 ## **Dataset**  
 The dataset contains information on student demographics, IT domain choices, and test participation across 25 African countries. You can access the dataset here:  
-<u>[](#)</u> (Replace with actual link)
+<u>[](https://github.com/MaxugoAnalytics/Student-Payment-App-and-EDA/blob/main/Raw%20student_data.csv)</u> (Replace with actual link)
 
 ## **Prediction App**  
 The machine learning model developed in this project has been turned into an interactive prediction app. You can access and test the app here:  
-<u>[Link to Prediction App](#)</u> (Replace with actual link)
+<u>[Link to Prediction App](https://huggingface.co/spaces/Nalytics/student_app)</u>
 
 ## **How to Run the Project**  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/project-name.git
+  git clone https://github.com/MaxugoAnalytics/Student-Payment-App-and-EDA.git
+
 
 ## Conclusion
 This project provides a comprehensive look into how African students approach IT career choices and how factors like financial incentives can influence their participation. The insights gained could be used to inform educational policies, career guidance, and technology initiatives across the continent.
