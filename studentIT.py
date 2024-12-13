@@ -1,65 +1,88 @@
 import streamlit as st
 import pandas as pd
-import gdown
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
 
-# Step 3: Download the data from Google Drive
+# Load the dataset
 url = 'https://drive.google.com/uc?id=1QFcjwoJSZL5-hQ7iWN10WzQlxVHY59fW&export=download'
-output = 'survey_data.csv'
+df = pd.read_csv(url)  # Use pandas to read the dataset from the URL
 
-# Download the file
-gdown.download(url, output, quiet=False)
+# Layout: Two rows and four columns for visuals
+st.title("Dashboard - IT Survey Insights")
 
-# Load the data into a DataFrame
-data = pd.read_csv(output)
+# Row 1
+col1, col2, col3, col4 = st.columns(4)
 
-# Step 4: Dashboard Setup
-st.title("Survey Dashboard")
+with col1:
+    st.subheader("Country Distribution")
+    country_count = df['country'].value_counts()
+    fig1 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=country_count.index, y=country_count.values)
+    plt.xticks(rotation=45)
+    plt.title('Country Distribution')
+    st.pyplot(fig1)
 
-# Sidebar Filters
-st.sidebar.header("Filters")
+with col2:
+    st.subheader("Preferred IT Fields")
+    it_field_count = df['preferred_IT_field'].value_counts()
+    fig2 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=it_field_count.index, y=it_field_count.values)
+    plt.xticks(rotation=45)
+    plt.title('Preferred IT Fields')
+    st.pyplot(fig2)
 
-# Filter by region
-region_filter = st.sidebar.selectbox("Select Region", data["region"].unique())
+with col3:
+    st.subheader("Final Payment Status")
+    payment_status_count = df['final_payment_status'].value_counts()
+    fig3 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=payment_status_count.index, y=payment_status_count.values)
+    plt.xticks(rotation=45)
+    plt.title('Payment Status')
+    st.pyplot(fig3)
 
-# Filter by preferred IT field
-field_filter = st.sidebar.selectbox("Select IT Field", data["preferred_IT_field"].unique())
+with col4:
+    st.subheader("NDA Status")
+    nda_status_count = df['nda_status'].value_counts()
+    fig4 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=nda_status_count.index, y=nda_status_count.values)
+    plt.xticks(rotation=45)
+    plt.title('NDA Status')
+    st.pyplot(fig4)
 
-# Filter by submission status
-submission_status_filter = st.sidebar.selectbox("Select Submission Status", data["submission_status"].unique())
+# Row 2
+col5, col6, col7, col8 = st.columns(4)
 
-# Filter by survey status
-survey_status_filter = st.sidebar.selectbox("Select Survey Status", data["survey_status"].unique())
+with col5:
+    st.subheader("Likely to Pay")
+    payment_likelihood = df['likely_to_paid'].value_counts()
+    fig5 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=payment_likelihood.index, y=payment_likelihood.values)
+    plt.xticks(rotation=45)
+    plt.title('Likelihood to Pay')
+    st.pyplot(fig5)
 
-# Step 5: Apply Filters to Data
-filtered_data = data[
-    (data["region"] == region_filter) &
-    (data["preferred_IT_field"] == field_filter) &
-    (data["submission_status"] == submission_status_filter) &
-    (data["survey_status"] == survey_status_filter)
-]
+with col6:
+    st.subheader("Region Distribution")
+    region_count = df['region'].value_counts()
+    fig6 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=region_count.index, y=region_count.values)
+    plt.xticks(rotation=45)
+    plt.title('Region Distribution')
+    st.pyplot(fig6)
 
-# Step 6: Display Data
-st.subheader("Filtered Data")
-st.write(filtered_data)
+with col7:
+    st.subheader("Survey Status")
+    survey_status_count = df['nda_status'].value_counts()  # Assume NDA status is the survey status column
+    fig7 = plt.figure(figsize=(5, 4))
+    sns.barplot(x=survey_status_count.index, y=survey_status_count.values)
+    plt.xticks(rotation=45)
+    plt.title('Survey Status')
+    st.pyplot(fig7)
 
-# Step 7: Data Visualizations
-st.subheader("Data Visualizations")
-
-# Display a bar chart for preferred IT field
-st.bar_chart(filtered_data["preferred_IT_field"].value_counts())
-
-# Display a bar chart for submission status
-st.bar_chart(filtered_data["submission_status"].value_counts())
-
-# Display a bar chart for survey status
-st.bar_chart(filtered_data["survey_status"].value_counts())
-
-# Step 8: Download the filtered data
-st.subheader("Download Filtered Data")
-st.download_button(
-    label="Download CSV",
-    data=filtered_data.to_csv(index=False),
-    file_name="filtered_survey_data.csv",
-    mime="text/csv"
-)
-
+with col8:
+    st.subheader("Payment Status by Region")
+    payment_region_df = df.groupby(['region', 'final_payment_status']).size().unstack().fillna(0)
+    fig8 = payment_region_df.plot(kind='bar', stacked=True, figsize=(5, 4))
+    plt.title('Payment Status by Region')
+    st.pyplot(fig8)
