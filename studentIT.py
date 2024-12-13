@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 st.set_page_config(page_title="Tech Futures: Empowering Africa's Youth Through IT Exploration", page_icon=":bar_chart:", layout="wide")
-st.title(':bar_chart: Tech Futures: Empowering Africa's Youth Through IT Exploration')
+st.title(':bar_chart: Tech Futures Empowering Africa's Youth Through IT Exploration')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 
 # Load and cache data
