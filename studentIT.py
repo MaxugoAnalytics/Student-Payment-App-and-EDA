@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(page_title="Survey Insights Dashboard", page_icon=":bar_chart:", layout="wide")
-st.title(':bar_chart: Survey Insights Dashboard')
+st.set_page_config(page_title="Tech Futures: Empowering Africa's Youth Through IT Exploration", page_icon=":bar_chart:", layout="wide")
+st.title(':bar_chart: Tech Futures: Empowering Africa's Youth Through IT Exploration')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 
 # Load and cache data
@@ -17,7 +17,6 @@ def load_data():
 df = load_data()
 
 # Metrics Section
-st.subheader("Key Metrics")
 metrics_row = st.columns(5)
 metrics_row[0].markdown(
     '<div class="metric-box">'
@@ -54,10 +53,6 @@ metrics_row[4].markdown(
     '</div>',
     unsafe_allow_html=True
 )
-
-# Data Visualizations Section
-st.subheader("Data Visualizations")
-
 # Row 1 (Four Columns)
 row1 = st.columns(4)
 
