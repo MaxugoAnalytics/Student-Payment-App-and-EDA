@@ -64,7 +64,16 @@ row1 = st.columns(4)
 with row1[0]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Country Distribution</div>', unsafe_allow_html=True)
-    country_count = df['country'].value_counts()
+    
+    country_filter = st.multiselect(
+        "Select Country",
+        options=["All"] + list(df["country"].unique()),
+        default=["All"],
+        key="country_filter",
+    )
+    filtered_data = df if "All" in country_filter else df[df["country"].isin(country_filter)]
+    
+    country_count = filtered_data['country'].value_counts()
     fig1 = px.bar(
         x=country_count.index,
         y=country_count.values,
@@ -77,7 +86,16 @@ with row1[0]:
 with row1[1]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Preferred IT Fields</div>', unsafe_allow_html=True)
-    it_field_count = df['preferred_IT_field'].value_counts()
+    
+    it_field_filter = st.multiselect(
+        "Select IT Fields",
+        options=["All"] + list(df["preferred_IT_field"].unique()),
+        default=["All"],
+        key="it_field_filter",
+    )
+    filtered_data = df if "All" in it_field_filter else df[df["preferred_IT_field"].isin(it_field_filter)]
+    
+    it_field_count = filtered_data['preferred_IT_field'].value_counts()
     fig2 = px.bar(
         x=it_field_count.index,
         y=it_field_count.values,
@@ -90,7 +108,16 @@ with row1[1]:
 with row1[2]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Final Payment Status</div>', unsafe_allow_html=True)
-    payment_status_count = df['final_payment_status'].value_counts()
+    
+    payment_status_filter = st.multiselect(
+        "Select Payment Status",
+        options=["All"] + list(df["final_payment_status"].unique()),
+        default=["All"],
+        key="payment_status_filter",
+    )
+    filtered_data = df if "All" in payment_status_filter else df[df["final_payment_status"].isin(payment_status_filter)]
+    
+    payment_status_count = filtered_data['final_payment_status'].value_counts()
     fig3 = px.bar(
         x=payment_status_count.index,
         y=payment_status_count.values,
@@ -103,7 +130,16 @@ with row1[2]:
 with row1[3]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">NDA Status</div>', unsafe_allow_html=True)
-    nda_status_count = df['nda_status'].value_counts()
+    
+    nda_status_filter = st.multiselect(
+        "Select NDA Status",
+        options=["All"] + list(df["nda_status"].unique()),
+        default=["All"],
+        key="nda_status_filter",
+    )
+    filtered_data = df if "All" in nda_status_filter else df[df["nda_status"].isin(nda_status_filter)]
+    
+    nda_status_count = filtered_data['nda_status'].value_counts()
     fig4 = px.bar(
         x=nda_status_count.index,
         y=nda_status_count.values,
@@ -119,7 +155,16 @@ row2 = st.columns(4)
 with row2[0]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Likely to Pay</div>', unsafe_allow_html=True)
-    payment_likelihood = df['likely_to_paid'].value_counts()
+    
+    payment_likelihood_filter = st.multiselect(
+        "Select Likelihood to Pay",
+        options=["All"] + list(df["likely_to_paid"].unique()),
+        default=["All"],
+        key="payment_likelihood_filter",
+    )
+    filtered_data = df if "All" in payment_likelihood_filter else df[df["likely_to_paid"].isin(payment_likelihood_filter)]
+    
+    payment_likelihood = filtered_data['likely_to_paid'].value_counts()
     fig5 = px.bar(
         x=payment_likelihood.index,
         y=payment_likelihood.values,
@@ -132,7 +177,16 @@ with row2[0]:
 with row2[1]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Region Distribution</div>', unsafe_allow_html=True)
-    region_count = df['region'].value_counts()
+    
+    region_filter = st.multiselect(
+        "Select Region",
+        options=["All"] + list(df["region"].unique()),
+        default=["All"],
+        key="region_filter",
+    )
+    filtered_data = df if "All" in region_filter else df[df["region"].isin(region_filter)]
+    
+    region_count = filtered_data['region'].value_counts()
     fig6 = px.bar(
         x=region_count.index,
         y=region_count.values,
@@ -145,7 +199,16 @@ with row2[1]:
 with row2[2]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Survey Status</div>', unsafe_allow_html=True)
-    survey_status_count = df['nda_status'].value_counts()  # Assuming nda_status as survey status
+    
+    survey_status_filter = st.multiselect(
+        "Select Survey Status",
+        options=["All"] + list(df["nda_status"].unique()),  # Assuming nda_status is used as survey status
+        default=["All"],
+        key="survey_status_filter",
+    )
+    filtered_data = df if "All" in survey_status_filter else df[df["nda_status"].isin(survey_status_filter)]
+    
+    survey_status_count = filtered_data['nda_status'].value_counts()
     fig7 = px.bar(
         x=survey_status_count.index,
         y=survey_status_count.values,
@@ -158,7 +221,16 @@ with row2[2]:
 with row2[3]:
     st.markdown('<div class="visual-box">', unsafe_allow_html=True)
     st.markdown('<div class="visual-title">Payment Status by Region</div>', unsafe_allow_html=True)
-    payment_region_df = df.groupby(['region', 'final_payment_status']).size().unstack().fillna(0)
+    
+    payment_region_filter = st.multiselect(
+        "Select Region",
+        options=["All"] + list(df["region"].unique()),
+        default=["All"],
+        key="payment_region_filter",
+    )
+    filtered_data = df if "All" in payment_region_filter else df[df["region"].isin(payment_region_filter)]
+    
+    payment_region_df = filtered_data.groupby(['region', 'final_payment_status']).size().unstack().fillna(0)
     fig8 = px.bar(
         payment_region_df,
         labels={'final_payment_status': 'Payment Status', 'region': 'Region'},
